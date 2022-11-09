@@ -15,11 +15,10 @@ const VideoCard = ({
     snippet,
   },
 }) => {
-  console.log(videoId, snippet);
   return (
     <Card
       sx={{
-        width: { md: "350px", xs: "100%" },
+        width: { md: "265px", xs: "100%" },
         borderRadius: 0,
         boxShadow: "none",
         mb: 2,
