@@ -18,11 +18,13 @@ import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import HistoryIcon from "@mui/icons-material/History";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
+import { Code } from "@mui/icons-material";
 
 export const logo = "https://i.ibb.co/s9Qys2j/logo.png";
 
 export const categories = [
   { name: "Home", icon: <HomeIcon /> },
+  { name: "JavaScript Mastery", icon: <Code /> },
   { name: "Shorts", icon: <SlowMotionVideoIcon /> },
   { name: "Subscription", icon: <SubscriptionsIcon /> },
 ];
