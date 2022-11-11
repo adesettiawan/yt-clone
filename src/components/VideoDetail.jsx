@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { Typography, Box, Stack } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
@@ -12,6 +12,7 @@ const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
   const [videos, setVideos] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFromAPI(`videos?part=snippet,statistics&id=${id}`).then((data) =>
@@ -29,6 +30,11 @@ const VideoDetail = () => {
     snippet: { title, publishedAt, channelId, description, channelTitle },
     statistics: { viewCount, likeCount, commentCount },
   } = videoDetail;
+
+  const goToChannelId = (id) => {
+    navigate("/channel/" + id);
+    window.location.reload();
+  };
 
   return (
     <Box minHeight="95vh">
@@ -56,7 +62,7 @@ const VideoDetail = () => {
               py={1}
               px={4}
             >
-              <Link to={`channel/${channelId}`}>
+              <Link onClick={() => goToChannelId(channelId)}>
                 <Typography
                   variant={{ sm: "subtitle1", md: "h6" }}
                   color="#fff"

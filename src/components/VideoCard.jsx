@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 
@@ -15,6 +15,17 @@ const VideoCard = ({
     snippet,
   },
 }) => {
+  const navigate = useNavigate();
+
+  const goToVideoId = (id) => {
+    navigate("/video/" + id);
+    window.location.reload();
+  };
+
+  const goToChannelId = (id) => {
+    navigate("/channel/" + id);
+    window.location.reload();
+  };
   return (
     <Card
       sx={{
@@ -24,7 +35,7 @@ const VideoCard = ({
         mb: 2,
       }}
     >
-      <Link to={videoId ? `video/${videoId}` : demoVideoUrl}>
+      <Link onClick={() => (videoId ? goToVideoId(videoId) : demoVideoUrl)}>
         <CardMedia
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
@@ -32,15 +43,15 @@ const VideoCard = ({
         ></CardMedia>
       </Link>
       <CardContent sx={{ background: "#1e1e1e", height: "106px" }}>
-        <Link to={videoId ? `video/${videoId}` : demoVideoUrl}>
+        <Link onClick={() => (videoId ? goToVideoId(videoId) : demoVideoUrl)}>
           <Typography variant="subtitle1" fontWeight="bold" color="#fff">
             {snippet?.title.slice(0, 60) || demoVideoTitle.slice(0, 60)}
           </Typography>
         </Link>
         <Link
-          to={
+          onClick={() =>
             snippet?.channelId
-              ? `channel/${snippet?.channelId}`
+              ? goToChannelId(snippet?.channelId)
               : demoChannelUrl
           }
         >

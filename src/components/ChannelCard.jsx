@@ -1,10 +1,17 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { demoProfilePicture } from "../utils/constants";
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
+  const navigate = useNavigate();
+
+  const goToChannelId = (id) => {
+    navigate("/channel/" + id);
+    window.location.reload();
+  };
+
   return (
     <Box
       sx={{
@@ -19,7 +26,7 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
         marginTop,
       }}
     >
-      <Link to={`channel/${channelDetail?.id?.channelId}`}>
+      <Link onClick={() => goToChannelId(channelDetail?.id?.channelId)}>
         <CardContent
           sx={{
             display: "flex",
