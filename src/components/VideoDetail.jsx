@@ -6,14 +6,20 @@ import { CheckCircle } from "@mui/icons-material";
 
 import Videos from "./Videos";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
+import moment from "moment/moment";
 
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
+  const [videos, setVideos] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
     fetchFromAPI(`videos?part=snippet,statistics&id=${id}`).then((data) =>
       setVideoDetail(data.items[0])
+    );
+
+    fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
+      (data) => setVideos(data.items)
     );
   }, [id]);
 
@@ -28,7 +34,13 @@ const VideoDetail = () => {
     <Box minHeight="95vh">
       <Stack direction={{ md: "row", sm: "column" }}>
         <Box flex={1}>
-          <Box sx={{ width: "100%", position: "sticky", top: "86px" }}>
+          <Box
+            sx={{
+              width: "100%",
+              top: "86px",
+              position: "sticky",
+            }}
+          >
             <ReactPlayer
               url={`https://www.youtube.com/watch?v=${id}`}
               className="react-player"
@@ -58,9 +70,55 @@ const VideoDetail = () => {
                     }}
                   />
                 </Typography>
+                <Stack direction="row" gap="20px">
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ opacity: 0.8 }}
+                    color="#fff"
+                    pt={2}
+                  >
+                    {parseInt(viewCount).toLocaleString()} Views
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ opacity: 0.8 }}
+                    color="#fff"
+                    pt={2}
+                  >
+                    {moment(publishedAt).format("DD MMM YYYY")}
+                  </Typography>
+                </Stack>
               </Link>
+              <Stack direction="row" gap="20px" alignItems="center">
+                <Typography variant="body1" sx={{ opacity: 0.8 }} color="#fff">
+                  {parseInt(commentCount).toLocaleString()} Comments
+                </Typography>
+                <Typography variant="body1" sx={{ opacity: 0.8 }} color="#fff">
+                  {parseInt(likeCount).toLocaleString()} Likes
+                </Typography>
+              </Stack>
+            </Stack>
+            <Stack>
+              <Typography
+                color="#fff"
+                variant="caption"
+                sx={{ opacity: 0.7 }}
+                px={4}
+                pt={-1}
+              >
+                {description}
+              </Typography>
             </Stack>
           </Box>
+        </Box>
+
+        <Box
+          px={2}
+          py={{ md: 1, xs: 5 }}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Videos videos={videos} direction="column" />
         </Box>
       </Stack>
     </Box>
