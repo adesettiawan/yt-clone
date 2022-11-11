@@ -53,11 +53,11 @@ export const explore = [
   { name: "Gym", icon: <FitnessCenterIcon /> },
 ];
 
-export const demoThumbnailUrl = "https://i.ibb.co/G2L2Gwp/API-Course.png";
-export const demoChannelUrl = "/channel/UCmXmlB4-HJytD7wek0Uo97A";
-export const demoVideoUrl = "/video/GDa8kZLNhJ4";
-export const demoChannelTitle = "JavaScript Mastery";
-export const demoVideoTitle =
-  "Build and Deploy 5 JavaScript & React API Projects in 10 Hours - Full Course | RapidAPI";
+export const demoThumbnailUrl =
+  "https://xam.com.au/wp-content/uploads/2019/03/1flutter_blog-2-750x400-1.png";
+export const demoChannelUrl = "/channel/UCcV-PS7A8y7tOvwCnQaRLEQ";
+export const demoVideoUrl = "/video/ZE-oA0N4BDg";
+export const demoChannelTitle = "Ade Setiawan";
+export const demoVideoTitle = "Learn Every Day";
 export const demoProfilePicture =
   "http://dergipark.org.tr/assets/app/images/buddy_sample.png";
